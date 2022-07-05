@@ -81,6 +81,52 @@
   <build>
     <plugins>
       <plugin>
+        <groupId>org.jooq</groupId>
+        <artifactId>jooq-codegen-maven</artifactId>
+        <executions>
+          <execution>
+            <id>generate-source-on-compilation</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <generator>
+            <name>org.jooq.codegen.JavaGenerator</name>
+            <strategy>
+              <name>org.jooq.codegen.DefaultGeneratorStrategy</name>
+            </strategy>
+            <database>
+              <name>org.jooq.meta.extensions.jpa.JPADatabase</name>
+              <properties>
+                <property>
+                  <key>packages</key>
+                  <value>jooq.demo.com.entites</value>
+                </property>
+                <property>
+                  <key>hibernate.globally_quoted_identifiers</key>
+                  <value>true</value>
+                </property>
+                <property>
+                  <key>useAttributeConverters</key>
+                  <value>true</value>
+                </property>
+                <property>
+                  <key>unqualifiedSchema</key>
+                  <value>none</value>
+                </property>
+              </properties>
+            </database>
+            <target>
+              <packageName>jooq.demo.com</packageName>
+              <directory>target/generated-sources/jooq</directory>
+            </target>
+          </generator>
+        </configuration>
+      </plugin>
+      <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
         <configuration>
@@ -91,43 +137,6 @@
             </exclude>
           </excludes>
         </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.jooq</groupId>
-        <artifactId>jooq-codegen-maven</artifactId>
-        <executions>
-          <execution>
-            <phase>generate-sources</phase>
-            <goals>
-              <goal>generate</goal>
-            </goals>
-            <configuration>
-              <generator>
-                <database>
-                  <name>org.jooq.meta.extensions.jpa.JPADatabase</name>
-                  <properties>
-                    <property>
-                      <key>packages</key>
-                      <value>jooq.demo.com.entites</value>
-                    </property>
-                    <property>
-                      <key>useAttributeConverters</key>
-                      <value>true</value>
-                    </property>
-                    <property>
-                      <key>unqualifiedSchema</key>
-                      <value>none</value>
-                    </property>
-                  </properties>
-                </database>
-                <target>
-                  <packageName>jooq.demo.com</packageName>
-                  <directory>target/generated-sources/jooq</directory>
-                </target>
-              </generator>
-            </configuration>
-          </execution>
-        </executions>
       </plugin>
     </plugins>
   </build>
