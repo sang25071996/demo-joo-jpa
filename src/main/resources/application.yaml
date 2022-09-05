@@ -1,3 +1,7 @@
+jwt:
+    expirationMs: '86400000'
+    secret: 'DEMOApp$f58BmDC)&?O!19#P:'
+
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/jooq-demo
@@ -8,7 +12,7 @@ spring:
 
 swagger-ui:
   server:
-    url: localhost:8080
+    url: 'http://localhost:8080'
 
 logging:
   level:

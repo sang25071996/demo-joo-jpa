@@ -1,12 +1,12 @@
 package jooq.demo.com.config;
 
-import com.cdp.common.utils.JwtUtils;
-import com.cdp.service.UserDetailsServiceImpl;
 import java.io.IOException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import jooq.demo.com.common.utils.JwtUtils;
+import jooq.demo.com.service.UserDetailsServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

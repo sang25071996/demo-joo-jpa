@@ -29,11 +29,11 @@ public class JwtUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
-    @Value("${cdp.app.jwtSecret}")
-    private String jwtSecret;
+    @Value("${jwt.secret}")
+    private String secret;
 
-    @Value("${cdp.app.jwtExpirationMs}")
-    private int jwtExpirationMs;
+    @Value("${jwt.expirationMs}")
+    private int expirationMs;
 
     private Collection<GrantedAuthority> authorities;
 
@@ -50,7 +50,7 @@ public class JwtUtils {
                 .setClaims(claims)
                 .setSubject((userPrinciple.getUsername()))
                 .setIssuedAt(new Date())
-                .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
+                .setExpiration(new Date((new Date()).getTime() + expirationMs))
                 .signWith(secret)
                 .compact();
     }
@@ -104,7 +104,7 @@ public class JwtUtils {
     }
 
     private SecretKey getSecretKey() {
-        byte[] encode = Base64.getEncoder().encode(this.jwtSecret.getBytes(StandardCharsets.UTF_8));
+        byte[] encode = Base64.getEncoder().encode(this.secret.getBytes(StandardCharsets.UTF_8));
         return Keys.hmacShaKeyFor(encode);
     }
 

@@ -1,7 +1,6 @@
 package jooq.demo.com.config;
 
-import com.cdp.filter.JwtAuthenticationEntryPoint;
-import com.cdp.service.UserDetailsServiceImpl;
+import jooq.demo.com.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -80,7 +79,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(AUTH_WHITELIST).permitAll()
-                .antMatchers("/api/auth/**").permitAll()
+                .antMatchers("/api/auth/**", "/api/roles/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilterAfter(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

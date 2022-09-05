@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PostUpdate;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,18 +21,15 @@ import lombok.Setter;
 public class User {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
-  private int id;
+  private Long id;
 
   @Column(name = "username")
   private String username;
 
   @Column(name = "password")
   private String password;
-
-  @Column(name = "email")
-  private String email;
 
   @Column(name = "created_date")
   private Date createdDate;
@@ -42,4 +40,5 @@ public class User {
   @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "role_id")
   private Role role;
+
 }
