@@ -1,5 +1,7 @@
 package jooq.demo.com.exception;
 
+import jooq.demo.com.model.SysError;
+
 public class NotFoundException extends RuntimeException{
 
   private static final long serialVersionUID = 1L;

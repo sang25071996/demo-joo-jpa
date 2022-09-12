@@ -1,3 +1,7 @@
+jwt:
+    expirationMs: '86400000'
+    secret: 'DEMOApp$f58BmDC)&?O!19#P:'
+
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/jooq-demo2
@@ -5,6 +9,13 @@ spring:
     password: 123456
   flyway:
     locations: classpath:db-migration
+  redis:
+    port: 6379
+    host: 'localhost'
+swagger-ui:
+  server:
+    url: 'http://localhost:8080'
+
 logging:
   level:
     org:

@@ -32,10 +32,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private CustomAccessDeniedHandler customAccessDeniedHandler;
 
-    public WebSecurityConfiguration(AuthenticationEntryPointJwt authenticationEntryPointJwt) {
-        this.authenticationEntryPointJwt = authenticationEntryPointJwt;
-    }
-
     @Bean
     public AuthenticationJwtFilter authenticationJwtTokenFilter() {
         return new AuthenticationJwtFilter();
@@ -76,15 +72,14 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.cors()
                 .and()
                 .csrf().disable()
-                .exceptionHandling()
+                .exceptionHandling().authenticationEntryPoint(authenticationEntryPointJwt)
                 .accessDeniedHandler(customAccessDeniedHandler)
-                .authenticationEntryPoint(authenticationEntryPointJwt)
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
                 .antMatchers(AUTH_WHITELIST).permitAll()
-                .antMatchers("/api/auth/**").permitAll()
+                .antMatchers("/api/auth/**", "/api/roles/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilterAfter(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

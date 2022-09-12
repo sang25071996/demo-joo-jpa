@@ -1,9 +1,11 @@
 package jooq.demo.com.exception;
 
+import jooq.demo.com.model.SysError;
+
 public class BadRequestException extends RuntimeException {
 
   private static final long serialVersionUID = 1L;
-  private  SysError sysError;
+  private SysError sysError;
 
   public BadRequestException(SysError sysError) {
     this.sysError = sysError;
