@@ -1,12 +1,9 @@
 package jooq.demo.com.service;
 
-import static jooq.demo.com.masters.Tables.ACCOUNTS;
-
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
-import jooq.demo.com.entites.Account;
 import jooq.demo.com.entites.AccountState;
 import jooq.demo.com.repository.AccountRepository;
 import jooq.demo.com.repository.AccountStateRepository;
@@ -34,10 +31,6 @@ public class AccountService {
         this.accountStateRepository = accountStateRepository;
         this.lockRegistry = lockRegistry;
         this.dslContext = dslContext;
-    }
-
-    public List<Account> getAccounts() {
-        return this.dslContext.select().from(ACCOUNTS).fetchInto(Account.class);
     }
 
     public boolean obtainLock(LockKeyAccount lockKeyAccount) {
