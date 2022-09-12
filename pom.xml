@@ -20,6 +20,15 @@
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-configuration-processor</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-jpa</artifactId>
     </dependency>
     <dependency>
@@ -50,7 +59,6 @@
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-integration</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework.integration</groupId>
@@ -98,16 +106,6 @@
       <groupId>org.flywaydb</groupId>
       <artifactId>flyway-core</artifactId>
       <version>8.5.12</version>
-    </dependency>
-    <dependency>
-      <groupId>io.springfox</groupId>
-      <artifactId>springfox-swagger2</artifactId>
-      <version>2.9.2</version>
-    </dependency>
-    <dependency>
-      <groupId>io.springfox</groupId>
-      <artifactId>springfox-swagger-ui</artifactId>
-      <version>2.9.2</version>
     </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>
@@ -203,7 +201,43 @@
           </excludes>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.jooq</groupId>
+        <artifactId>jooq-codegen-maven</artifactId>
+        <executions>
+          <execution>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <generator>
+                <database>
+                  <name>org.jooq.meta.extensions.jpa.JPADatabase</name>
+                  <properties>
+                    <property>
+                      <key>packages</key>
+                      <value>jooq.demo.com.entites</value>
+                    </property>
+                    <property>
+                      <key>useAttributeConverters</key>
+                      <value>true</value>
+                    </property>
+                    <property>
+                      <key>unqualifiedSchema</key>
+                      <value>none</value>
+                    </property>
+                  </properties>
+                </database>
+                <target>
+                  <packageName>jooq.demo.com</packageName>
+                  <directory>target/generated-sources/jooq</directory>
+                </target>
+              </generator>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
-
 </project>

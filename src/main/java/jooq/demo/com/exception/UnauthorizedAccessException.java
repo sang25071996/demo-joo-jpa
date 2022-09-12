@@ -1,6 +1,5 @@
 package jooq.demo.com.exception;
 
-
 import jooq.demo.com.model.SysError;
 import org.springframework.security.access.AccessDeniedException;
 

@@ -1,5 +1,6 @@
 package jooq.demo.com.controller;
 
+
 import java.util.Collections;
 import jooq.demo.com.common.constant.Constants;
 import jooq.demo.com.common.constant.Errors;
@@ -76,4 +77,3 @@ public class AuthController {
         new ResponeJson<>(userService.saveUser(signupRequest), HttpStatus.OK, Constants.SUCCESS));
   }
 }
-
